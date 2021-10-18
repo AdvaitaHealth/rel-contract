@@ -66,7 +66,7 @@ contract AddressList {
     string public name;
     address public owner;
     string public ownerNickName;
-    string public ownerAvatar = "https://www.marulong.top/upload/2021/09/pr4mllfoqeim8q5jr2be1j438h.jpg";
+    string public ownerAvatar = "https://avatars.githubusercontent.com/u/91399393?v=4";
     
     struct Friend {
         string name;
