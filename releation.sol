@@ -66,7 +66,7 @@ contract AddressList {
     string public name;
     address public owner;
     string public ownerNickName;
-    string public ownerAvatar = "https://avatars.githubusercontent.com/u/91399393?v=4";
+    string public ownerAvatar = "https://www.marulong.top/upload/2021/09/pr4mllfoqeim8q5jr2be1j438h.jpg";
     
     struct Friend {
         string name;
@@ -188,6 +188,11 @@ contract AddressList {
         emit GetMessage(friendAddress, _message);
 
     }
+
+    function getFriendInfo(uint256 index) public view returns(Friend memory friendInfo){
+        (,address value ) = friendAddressMap.iterate_get(index);
+        friendInfo = friendMap[value];
+    }
 }
 
 library IterableMapping {
@@ -285,6 +290,12 @@ contract OpenInfo {
     address[] public userList;
     uint256 public userSize;
 
+    event SendMessage(
+        address indexed senderAddress,
+        address indexed receiverAddress,
+        address indexed source,
+       string message
+    );
 
     function addOpenInfo(        address owner,
         string memory _ownerNickName,
@@ -301,5 +312,11 @@ contract OpenInfo {
         string memory _ownerAvatar
     ) public {
         UserInfoMap[owner] = UserInfo(_ownerNickName, _ownerAvatar);
+    }
+
+
+    function sendMessage(address receiverAddress,address source,string memory _message) public{
+        emit SendMessage(msg.sender,receiverAddress, source,_message);
+
     }
 }
